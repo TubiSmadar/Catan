@@ -501,7 +501,7 @@ bool Board::isRoadValidBetweenLands(int playerId, size_t index1, size_t index2)
         }
         return true;
     }
-    bool validation = false;
+
     // Check if the player owns an adjacent road on either land
     for (const auto& road : land1.getRoads())
     {
