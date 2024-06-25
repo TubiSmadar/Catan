@@ -97,8 +97,6 @@ private:
     // Vector to hold the roads
     vector<int> roads;
 
-    // int to keep track of the number of development cards
-    int developmentCardCount = 0;
 };
 
 #endif // PLAYER_HPP

@@ -39,12 +39,13 @@ int main() {
 
     catan.playTurn(player2);
     player2.rollDice(catan);
-    player2.placeRoad(12,13,board);
+    player2.placeRoad(12,13,board,0);
     catan.endTurn(player2);
 
     catan.playTurn(player3);
     player3.rollDice(catan);
     player3.chooseDevelopmentCard(catan);
+    player3.tradeResources(catan,2,"Ore",1,"Wood",1);
     player3.useMonopoly(catan,"Ore");
     catan.endTurn(player3);
 
