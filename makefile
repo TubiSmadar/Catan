@@ -7,7 +7,7 @@ VALGRIND_FLAGS=-v --leak-check=full --show-leak-kinds=all  --error-exitcode=99
 SRCS=$(wildcard *.cpp)
 OBJS=$(SRCS:.cpp=.o)
 
-run: demo
+run: catan
 	./$^
 
 catan: Demo.o board.o catan.o hextile.o player.o land.o road.o developmentCard.o 
