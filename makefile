@@ -27,4 +27,4 @@ tidy:
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) demo test
+	rm -f $(OBJS) catan test

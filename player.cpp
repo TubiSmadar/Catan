@@ -5,6 +5,7 @@
 #include "developmentCard.hpp"
 #include <iostream>
 
+// Constructor for Player class
 Player::Player(int id, const string &name)
     : id(id), name(name), turn(false)
 {
@@ -19,21 +20,27 @@ Player::Player(int id, const string &name)
     winner = -1;
 }
 
+// Getter for player ID
 int Player::getId() const
 {
     return id;
 }
 
+// Getter for player points
 int Player::getPoints() const {
     return points;
 }
+
+// Getter for player name
 const string &Player::getName() const
 {
     return name;
 }
 
+// Check if player can buy a settlement
 bool Player::canbuySettlement()
 {
+    // Check if player have enough resources
     if (resources[0].second >= 1 && resources[1].second >= 1 && resources[2].second >= 1 && resources[3].second >= 1)
     {
         return true;
@@ -44,6 +51,7 @@ bool Player::canbuySettlement()
     }
 }
 
+// Check if player can buy a city
 bool Player::canbuyCity()
 {
     if (resources[3].second >= 2 && resources[4].second >= 3)
@@ -56,6 +64,7 @@ bool Player::canbuyCity()
     }
 }
 
+// Check if player can buy a road
 bool Player::canbuyRoad()
 {
     if (resources[0].second >= 1 && resources[1].second >= 1)
@@ -68,6 +77,7 @@ bool Player::canbuyRoad()
     }
 }
 
+// Roll dice and handle the result
 void Player::rollDice(Catan &catan)
 {
     int diceRoll = rand() % 6 + 1 + rand() % 6 + 1;
@@ -85,6 +95,7 @@ void Player::rollDice(Catan &catan)
     }
 }
 
+// Handle resource discarding when a 7 is rolled
 void Player::discardResources(Catan &catan)
 {
     for (int i = 0; i < 3; i++)
@@ -126,6 +137,7 @@ void Player::discardResources(Catan &catan)
     }
 }
 
+// Place initial settlement and road
 void Player::placeInitialSettlementAndRoad(int landIndex, int landIndex2, Board &board)
 {
     if (this->turn == false) {
@@ -146,6 +158,7 @@ void Player::placeInitialSettlementAndRoad(int landIndex, int landIndex2, Board 
     }
 }
 
+// Place a settlement
 void Player::placeSettlement(int landIndex, Board &board, Catan &catan)
 {    
     if (this->turn == false) {
@@ -189,6 +202,7 @@ void Player::placeSettlement(int landIndex, Board &board, Catan &catan)
     }
 }
 
+// Upgrade settlement to city
 void Player::upgradeToCity(int landIndex, Board &board, Catan &catan)
 {
 
@@ -228,6 +242,7 @@ cerr << "Insufficient resources: " << this->getName() << " cannot upgrade settle
     }
 }
 
+// Place a road
 void Player::placeRoad(int landIndex1, int landIndex2, Board &board, int devCard = 0)
 {
     if (this->turn == false) {
@@ -256,6 +271,7 @@ void Player::placeRoad(int landIndex1, int landIndex2, Board &board, int devCard
     }
 }
 
+// Check if player can buy a development card
 void Player::canBuyDevelopmentCard()
 {
     if (resources[2].second >= 1 && resources[3].second >= 1 && resources[4].second >= 1)
@@ -272,6 +288,7 @@ void Player::canBuyDevelopmentCard()
         cerr << "Insufficient resources: " << this->getName() << " cannot buy a development card." << endl;    }
 }
 
+// Print player's settlements
 void Player::getSettlements() const
 {
     cout << "Player " << this->getName() << " has settlements on lands: ";
@@ -282,6 +299,7 @@ void Player::getSettlements() const
     cout << endl;
 }
 
+// Print player's Cities
 void Player::getCities() const
 {
     cout << "Player " << this->getName() << " has cities on lands+: ";
@@ -291,30 +309,35 @@ void Player::getCities() const
     }
 }
 
+// Getter for cities vector
 const vector<int> &Player::getCitiesVector() const
 {
     return cities;
 }
 
+// Getter for settlements vector
 const vector<int> &Player::getSettlementsVector() const
 {
     return settlements;
 }
 
+// Getter for roads vector
 const vector<int> &Player::getRoads() const
 {
     return roads;
 }
 
+// Print player resources
 void Player::getResources() const
 {
-    cout << "Player " << this->getName() << " has resources: \n";
+    cout << "Player " << this->getName() << " has: \n";
     for (int i = 0; i < 5; i++)
     {
         cout << resources[i].first << ": " << resources[i].second << " \n";
     }
 }
 
+// Add resource to player
 void Player::addResource(const string &resource, int amount)
 {
     for (int i = 0; i < 5; i++)
@@ -330,6 +353,7 @@ void Player::addResource(const string &resource, int amount)
     cout << "Player " << this->getName() << " got the next resources: Wood: " << resources[0].second << ", Brick: " << resources[1].second << ", Wool: " << resources[2].second << ", Wheat: " << resources[3].second << ", Ore: " << resources[4].second << endl;
 }
 
+// Player takes development card
 void Player::chooseDevelopmentCard(Catan &catan)
 {
     if (this->turn == false) {
@@ -376,6 +400,7 @@ void Player::chooseDevelopmentCard(Catan &catan)
     }
 }
 
+// Use knight development card
 void Player::useKnight(Catan &catan)
 {
     if (this->turn == false) {
@@ -435,6 +460,7 @@ void Player::useKnight(Catan &catan)
     cout << "Player " << this->getName() << " does not have a knight card" << endl;
 }
 
+// Use 2 roads building development card
 void Player::useRoadBuilding(Board &board, int landIndex1, int landIndex2, int landIndex3, int landIndex4)
 {
     if (this->turn == false) {
@@ -460,6 +486,7 @@ void Player::useRoadBuilding(Board &board, int landIndex1, int landIndex2, int l
     cout << "Player " << this->getName() << " does not have a road building card" << endl;
 }
 
+// Use year of plenty development card
 void Player::useYearOfPlenty(string resource1, string resource2)
 {
     if (this->turn == false) {
@@ -484,6 +511,7 @@ void Player::useYearOfPlenty(string resource1, string resource2)
     cout << "Player " << this->getName() << " does not have a year of plenty card" << endl;
 }
 
+// Use monopoly develoment card
 void Player::useMonopoly(Catan &catan, string resource)
 {
     if (this->turn == false) {
@@ -518,6 +546,7 @@ void Player::useMonopoly(Catan &catan, string resource)
     cout << "Player " << this->getName() << " does not have a monopoly card" << endl;
 }
 
+// Trade resources with another player
 void Player::tradeResources(Catan &catan, int player, string resource1, int amount, string resource2, int amount2)
 {
     if (this->turn == false) {

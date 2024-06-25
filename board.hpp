@@ -1,5 +1,9 @@
 // Tuvia Smadar
 // gunslokij@gmail.com
+
+
+// Defines the Board class for managing the game board in Catan
+
 #ifndef BOARD_HPP
 #define BOARD_HPP
 
@@ -11,47 +15,49 @@
 #include "developmentCard.hpp"
 
 using namespace std;
+
 class Player;
 
 class Board {
 public:
-    // Constructor to initialize the board with hextiles, lands, and roads
+    // Initializes the board with hextiles, lands, and roads
     Board();
 
-    // Assignment operator for Board class
+    // Assigns values from another Board object
     Board &operator=(const Board&);
 
-    // Getter for the vector of hextiles
+    // Returns a reference to the vector of hextiles
     vector<Hextile>& getHextiles();
-    // Getter for the vector of lands
+
+    // Returns a reference to the vector of lands
     vector<Land>& getLands();
 
-    // Function to print the current configuration of the board
+    // Displays the current board configuration
     void printBoard() const;
 
-    // Check if a settlement placement is valid on a specific land for a given player
+    // Validates settlement placement for a player on a specific land
     bool isSettlementValidOnLand(int playerId, size_t landIndex);
 
-    // Check if a road placement is valid between two specific lands for a given player
+    // Validates road placement for a player between two lands
     bool isRoadValidBetweenLands(int playerId, size_t landIndex1, size_t landIndex2);
 
-    // Check if upgrading to a city is valid on a specific land for a given player
+    // Validates city upgrade for a player on a specific land
     bool isCityValidOnLand(int playerId, size_t landIndex);
 
-    // Function to get the index of a road between two lands
+    // Retrieves the index of a road connecting two lands
     int getRoadByLandIndex(size_t landIndex1, size_t landIndex2);
 
-    // Check if a player can place initial settlements and roads on specified lands
+    // Checks if a player can place initial settlements and roads
     bool canPlaceInitialSettlementAndRoad(Player& player, size_t landIndex, size_t landIndex2);
 
 private:
-    // Vector to hold hextile objects representing the hexagonal tiles on the board
+    // Stores the hexagonal tiles of the board
     vector<Hextile> hextiles;
 
-    // Vector to hold land objects representing the vertices where settlements/cities can be placed
+    // Stores the land vertices where settlements/cities can be built
     vector<Land> lands;
 
-    // Vector to hold road objects representing the edges where roads can be built
+    // Stores the edges where roads can be constructed
     vector<Road> roads;
 };
 
