@@ -10,7 +10,7 @@ OBJS=$(SRCS:.cpp=.o)
 run: demo
 	./$^
 
-demo: Demo.o board.o catan.o hextile.o player.o land.o road.o developmentCard.o 
+catan: Demo.o board.o catan.o hextile.o player.o land.o road.o developmentCard.o 
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 test: Test.o board.o catan.o hextile.o player.o land.o road.o developmentCard.o 
