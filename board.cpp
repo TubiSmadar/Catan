@@ -12,13 +12,13 @@
 
 #include "board.hpp"
 
-// Board Constructor
+// Initializes the game board with terrains, numbers, and structures
 Board::Board()
 {
     cout << "Creating board!" << endl;
 
 
-    //Create vector for terrains names
+    // Define terrain types for the game
     vector<string> terrains = {"Mountains" , "Pasture", "Forest", 
                                "Agricultural", "Hills", "Pasture", 
                                "Hills", "Agricultural", "Forest", 
@@ -26,7 +26,7 @@ Board::Board()
                                "Mountains", "Agricultural", "Pasture",
                                "Hills", "Agricultural", "Pasture"};
 
-    // Create vector for terrains numbers
+    // Define vector for terrains numbers
     vector<int> numbers = {2,3,3,
                            4,4,5,
                            5,6,6,
@@ -58,7 +58,7 @@ Board::Board()
         lands.emplace_back(Land(i));
     }
 
-    // Create connections for each land site based on specific order
+    // Define connections for each land site based on specific order
     vector<vector<size_t>> hextileLandMap = {
         {0, 1, 2, 10, 9, 8},
         {2, 3, 4, 12, 11, 10}, 
@@ -255,29 +255,7 @@ Board::Board()
     cout << "Board is ready!" << endl;
 }
 
-
-Board& Board::operator=(const Board& other) {
-    if (this != &other) {
-        this->hextiles = other.hextiles;
-        this->lands = other.lands;
-        this->roads = other.roads;
-    }
-    return *this; 
-}
-
-// Return the Hextiles
-vector<Hextile> &Board::getHextiles()
-{
-    return hextiles;
-}
-
-// Returns the lands
-vector<Land> &Board::getLands()
-{
-    return lands;
-}
-
-// Prints the board
+// Displays the current board configuration
 void Board::printBoard() const {
     auto formatHex = [](const Hextile &hex) {
         return hex.getResource().substr(0, 3) + "(" + std::to_string(hex.getNumber()) + ")";
@@ -303,6 +281,28 @@ void Board::printBoard() const {
         }
         std::cout << line << std::endl;
     }
+}
+
+// Copy assignment operator for the Board class
+Board& Board::operator=(const Board& other) {
+    if (this != &other) {
+        this->hextiles = other.hextiles;
+        this->lands = other.lands;
+        this->roads = other.roads;
+    }
+    return *this; 
+}
+
+// Return the Hextiles
+vector<Hextile> &Board::getHextiles()
+{
+    return hextiles;
+}
+
+// Returns the lands
+vector<Land> &Board::getLands()
+{
+    return lands;
 }
 
 // Returns road index

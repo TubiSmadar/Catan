@@ -27,6 +27,7 @@ class Catan {
         // Vector to hold players
         vector<Player*> players;
         
+        // Gives resources to players based on dice roll
         void giveResources(int dice);
         
         // Vector to hold development cards
